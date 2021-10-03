@@ -1,0 +1,14 @@
+{
+  "name": "assignment1_heylissemachado",
+  "version": "0.0.1",
+  "description": "COMP229 Assignment 1",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Heylisse Machado Gonzalez",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^16.10.2"
+  }
+}
