@@ -1,29 +1,49 @@
+#!/usr/bin/env node
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-const http_1 = __importDefault(require("http"));
-const fs_1 = __importDefault(require("fs"));
-const hostname = '127.0.0.1';
-const port = 3000;
-console.log(port);
-const server = http_1.default.createServer((req, res) => {
-    res.setHeader('Content-Type', 'text/plain');
-    displayHome(res);
-});
-server.listen(port, hostname, () => {
-    console.log(`server runing at ${hostname}: ${port}`);
-});
-function displayHome(res) {
-    fs_1.default.readFile("index.html", (err, data) => {
-        if (err) {
-            res.writeHead(404);
-            res.end('ERROR:404 - page not found');
-            console.log('Error');
-        }
-        res.writeHead(200);
-        res.end(data);
-    });
+var app = require('../app');
+var debug = require('debug')('assignment1-heylissemachado:server');
+var http = require('http');
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
+var server = http.createServer(app);
+server.listen(port);
+server.on('error', onError);
+server.on('listening', onListening);
+function normalizePort(val) {
+    var port = parseInt(val, 10);
+    if (isNaN(port)) {
+        return val;
+    }
+    if (port >= 0) {
+        return port;
+    }
+    return false;
+}
+function onError(error) {
+    if (error.syscall !== 'listen') {
+        throw error;
+    }
+    var bind = typeof port === 'string'
+        ? 'Pipe ' + port
+        : 'Port ' + port;
+    switch (error.code) {
+        case 'EACCES':
+            console.error(bind + ' requires elevated privileges');
+            process.exit(1);
+            break;
+        case 'EADDRINUSE':
+            console.error(bind + ' is already in use');
+            process.exit(1);
+            break;
+        default:
+            throw error;
+    }
+}
+function onListening() {
+    var addr = server.address();
+    var bind = typeof addr === 'string'
+        ? 'pipe ' + addr
+        : 'port ' + addr.port;
+    debug('Listening on ' + bind);
 }
 //# sourceMappingURL=index.js.map
