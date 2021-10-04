@@ -9,9 +9,7 @@ import debug from 'debug';
 debug('assignment1-heylissemachado:server');
 import createError from 'http-errors';
 
-
-const app = require('./app');
-
+import app from './app';
 
 /**
  * Get port from environment and store in Express.
