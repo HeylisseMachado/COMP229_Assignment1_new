@@ -5,4 +5,4 @@
     }
     window.addEventListener('load', Start);
 })();
-//# sourceMappingURL=apps.js.map
+//# sourceMappingURL=app.js.map
