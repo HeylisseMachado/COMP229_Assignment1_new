@@ -7,6 +7,7 @@ import logger from 'morgan';
 import indexRouter from './routes/index';
 
 
+// instanciate express app
 const app = express();
 
 // view engine setup
@@ -18,9 +19,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'client')));
-app.use(express.static(path.join(__dirname, 'node_modules')));
+app.use(express.static(path.join(__dirname, 'node_modules'))); // add node_module as static sontent
 
+// router midleware , this is where we start using our router 
 app.use('/', indexRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
